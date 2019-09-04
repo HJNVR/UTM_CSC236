@@ -1,0 +1,220 @@
+% Template to use to complete Problem Set 1.
+% If you are using ShareLaTeX, you'll want to upload this file to your account.
+% Before modifying this file, we recommend trying to compile it as-is
+% to see what the basic template gives.
+
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcounter{ProblemNum}
+\newcounter{SubProblemNum}[ProblemNum]
+\renewcommand{\theProblemNum}{\arabic{ProblemNum}}
+\renewcommand{\theSubProblemNum}{\alph{SubProblemNum}}
+\newcommand*{\anyproblem}[1]{\newpage\subsection*{#1}}
+\newcommand*{\problem}[1]{\stepcounter{ProblemNum} %
+\anyproblem{Problem \theProblemNum. \; #1}}
+\newcommand*{\soln}[1]{\subsubsection*{#1}}
+\newcommand*{\solution}{\soln{Solution}}
+\renewcommand*{\part}{\stepcounter{SubProblemNum} %
+\soln{Part (\theSubProblemNum)}}
+
+
+% Document metadata
+\title{Problem Set \#2  \hspace{3cm} CSC236 Fall 2018}
+\author{Si Tong Liu, shuo Yang, Jing Huang}
+\date{Oct/12/2018}
+
+
+% Document starts here
+\begin{document}
+\maketitle
+
+
+
+\noindent \rule{\textwidth}{1pt}
+
+
+
+
+\vfill
+We declare that this assignment is solely our own work, and is in accordance
+with the University of Toronto Code of Behaviour on Academic Matters.
+
+\noindent \rule{\textwidth}{1pt}
+
+This submission has been prepared using \LaTeX.
+
+\newpage
+
+
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(Warmup - this problem will NOT be marked)}.
+\\
+
+\noindent Show that $\log{n!} \in\mathcal{O}(n\log{n})$.
+\vskip2pt
+\noindent (Here $m!$ stands for $m$ factorial, the product of first $m$ non-negative integers. By convention, $0!=1$.)\vskip5pt
+Solution: \vskip5pt
+According to the question, n is a non-negative integers. So $n >= 0$. Then we can get that $n!<=n^n$ and $\log{n!} <= \log{n^n}$. By the property of log, we can write $\log{n^n}$ as $n\log{n}$. So we get $\log{n!} <= n\log{n}$.\vskip5pt
+This completes the proof, $\log{n!} \in\mathcal{O}(n\log{n})$ for c = 1 and $n_0$ = 0.
+    
+
+
+%%Write your solution here
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+ \textsc{(4 Marks)}  Suppose you are coding an algorithm for finding the maximum sum of two elements in a list of positive integers.  Suppose you have access to a helper function sort(L) that takes in a list of positive integers and returns a list
+of the same elements but sorted in non-decreasing order. Moreover, suppose \verb|sort(L)| runs in time $\Theta(n \log{n})$ (e.g.,
+\verb|mergesort|).
+Write a Python program \verb|fastMaxSum| calling \verb|sort(L)| as a helper function that runs in time $\Theta(n \log{n})$. Justify
+why it has this running time.
+
+%%Write your solution here
+\begin{verbatim}
+solution:
+
+
+def fastMaxSum(L:list):
+    sortedList = sort(L)
+    return sortedList[-1] + sortedList[-2]
+\end{verbatim}
+
+Since the running time for L[-1] is O(1) and the running time for L[-2] is O(1). The total tuntime for the python function fastMaxSum is $ 2+n \log{n}$\vskip 5pt
+To prove this function runs in time $\Theta(n \log{n})$, we divide into two parts.\vskip 5pt
+Firstly, the Big O proof:\vskip 5pt
+\qquad $2+n\log{n} <= \log{n} + n\log{n}$ (if $\log{n} >= 2$, which implies to $n >= e^2$) \vskip5pt
+\qquad \qquad $<= n\log{n} + n\log{n}$ (by basic algorithm, $n\log{n} >\log{n}$, where $n >= e^2$)\vskip5pt
+\qquad \qquad $<= 2\log{n}$ \vskip5pt
+Therefore, we choose c = 2, $n_0= e^2$ to complete the Big O proof\vskip5pt
+Secondly, the Big Omega proof: \vskip5pt
+\qquad $2+n\log{n} >= n\log{n}$ (by basic algorithm) ($n >= 1$)\vskip5pt
+So we choose c = 1 and $n_0 = 1$ to complete the Big Omega proof.\vskip5pt
+Then, as the O and $\Omega$ proofs are now complete, the overall $\Theta$ proof is
+complete.
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(6 Marks) }\textbf{Practice  $\Theta$}. 
+  $$\forall k\in\mathbb{N}, 1^k+2^k+\dots+n^k\in\Theta({n^{k+1}}).$$ \vskip5pt
+%%Write your solution here
+solution: 
+We divide the proof into two parts: \vskip5pt
+Firstly, the Big O proof:\vskip5pt
+since $n\in{N} and$ $ n >= 1$, each number from 1 to n-1  is less than n.\vskip5pt
+so we can write\vskip5pt
+\qquad $$1^k+2^k+\dots+n^k <= n^k+n^k+\dots+n^k = n*n^k = n^{k+1}$$ \vskip5pt
+\qquad \qquad \qquad \qquad \qquad \qquad \qquad  $<=n^{k+1}$ \vskip5pt
+So we choose c = 1 and $n_0 = 1$ to complete the Big O proof.\vskip5pt
+Secondly, the Big Omega proof:\vskip5pt
+\qquad to make $$1^k+2^k+\dots+n^k >= c *(n^k+n^k+\dots+n^k)$$ valid, we have to make c as small as possible.\vskip5pt
+So we choose $n_0 = 1$ and $c = 10^{-100000}$ to complete\vskip5pt
+Then, as the O and $\Omega$ proofs are now complete, the overall $\Theta$ proof is
+complete. 
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\problem{}
+\textsc{(10 marks)} \textbf{Recursive functions}. 
+
+Consider the following recursively defined function:
+
+\[   
+T(n)= 
+     \begin{cases}
+       c_0&\quad n = 0\\
+       c_1 &\quad n = 1 \\
+       aT(n-1)+bT(n-2)&\quad n\ge 2\\
+     \end{cases}
+\]
+
+where $a,b$ are real numbers.
+
+\vskip5pt
+
+Denote (*) the following relation:
+
+$$T(n) = aT(n-1)+bT(n-2) \quad n\ge 2\eqno (*)$$
+\vskip5pt
+We say a function $f(n)$ satisfies (*) iff $f(n)=af(n-1)+bf(n-2)$ is a true statement for $n\ge 2$.
+
+\vskip5pt
+
+Prove the following:
+
+\begin{enumerate}
+\item [(i)] For all functions $f,g:\mathbb{N}\to\mathbb{R}$, for any two real numbers $\alpha, \beta$, if $f(n)$ and $g(n)$ satisfy (*) for $n\ge 2$ then also $h(n)=\alpha f(n)+\beta g(n)$ satisfies it  for $n\ge 2$.
+\item [(ii)] Let $q \ne 0$ be a real number. Show that if $f(n)=q^n$ satisfies (*)  for $n\ge 2$ then $q$ is a root of quadratic equation $x^2-ax-b=0$.
+\item [(iii)] State and prove the converse of (ii). Use this statement and part (i) to show that if $q_1, q_2$ are the roots of $x^2-ax-b=0$ then $h(n)=Aq_1^n+Bq_2^n$ satisfies (*) for any two numbers $A,B$.
+\item [(iv)] Consider $h(n)$ from part (iii). What additional condition should we impose on the roots $q_1, q_2$ so $h(n)$ serves as a closed-form solution for $T(n)$ with $A,B$ uniquely determined?
+\item [(v)] Use the previous parts of this exercise to solve the following recurrence in closed form:
+\[   
+T(n)= 
+     \begin{cases}
+      5&\quad n = 0\\
+      17&\quad n = 1 \\
+       5T(n-1)-6T(n-2)&\quad n\ge 2\\
+     \end{cases}
+\]
+
+\end{enumerate}\vskip5pt
+
+
+%%Write your solution here
+solution:\vskip5pt
+(i) if $f(n)$ and $g(n)$ satisfy (*) for $n\ge 2$, then we can write $f(n) = af(n-1) + bf(n-2)$ and $g(n) = ag(n-1) + b g(n-2)$. \vskip5pt
+So $h(n) = \alpha (af(n-1) + bf(n-2)) + \beta (ag(n-1) + b g(n-2)) $ \vskip5pt
+\qquad  = $a(\alpha f(n-1) + \beta g(n-1)) + b(\alpha f(n-2) + \beta g(n-2))$\vskip5pt
+\qquad  = $ah(n-1) + bh(n-2)$ (by given recursive rule)
+So we can verify that the statement is true.
+\\[2ex]
+\\[2ex]
+(ii) if $f(n) = q^n$, we can plug it into T(n)\vskip5pt
+\qquad \qquad $q^n = aq^{n-1} + bq^{n-2}$\vskip5pt
+\qquad \qquad $q^n - aq^{n-1} - bq^{n-2} = 0$ \vskip5pt
+\qquad \qquad $q^2 - aq - b = 0$ (by basic algorithm, since $q \ne 0, q^{n-2} \ne 0$, we can divide $q^{n-2}$ both side )\vskip5pt
+Then if we assume q = x, we can get $x^2 - ax - b = 0$. So q is a root of the quadratic equation. This completes the proof.
+\\[2ex]
+\\[2ex]
+(iii) Firstly, the converse of (ii) we need to prove: if q is a root of quadratic equation $x^2 - ax - b = 0$, then $f(n) = q^n$ satisfies (*) for $n\ge 2$\vskip5pt
+We plug q into the equation and we get $q^2 - aq - b = 0$\vskip5pt
+\qquad \qquad \qquad \qquad \qquad  $q^2*q^{n-2} - aq*q^{n-2} - b*q^{n-2} = 0$(since $q \ne 0$, \vskip5pt \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad we can multiply $q^{n-2}$ both side) \vskip5pt
+\qquad \qquad \qquad \qquad \qquad  $q^n - aq^{n-1} - bq^{n-2} = 0$\vskip5pt
+\qquad \qquad \qquad \qquad \qquad  $q^n = aq^{n-1} + bq^{n-2} $\vskip5pt
+if we assume $f(n) = q^n$ , we can get  $f(n)= af(n-1) + bf(n-2 )$, which satisfies (*)\vskip5pt
+This completes the proof. The converse of (ii) is true.\vskip5pt
+Secondly, by using the statement we have proven above, If we assume $f(n) = q_1^n$ and $g(n) = q_2^n$, both $f(n)$ and $g(n)$ should satisfy (*) for $n\ge 2$.\vskip5pt
+Then we can get $h(n)=Aq_1^n+Bq_2^n = Af(n) + Bg(n)$.\vskip5pt
+According to part(i), $h(n)=Aq_1^n+Bq_2^n$ satisfy (*) with $\alpha = A$ and $\delta = B$\vskip5pt
+This completes the proof.
+\\[2ex]
+\\[2ex]
+(iv) To find the close form of T(n)\vskip5pt
+when k = 1 , $T(n) = aT(n-1) + bT(n-2) $\vskip5pt
+when k = 2 , $T(n) = a(aT(n-2)) + b(bT(n-4))$\vskip5pt
+\qquad \qquad \qquad \qquad  = $a^2T(n-2) + b^2T(n-4)$\vskip5pt
+when k = 3 , $T(n) = a(a^2T(n-3)) + b(b^2T(n-6))$\vskip5pt
+\qquad \qquad \qquad \qquad = $a^3T(n-3) + b^3T(n-6)$\vskip5pt
+\qquad \qquad \qquad \qquad ...\vskip5pt
+\qquad \qquad \qquad \qquad ...\vskip5pt
+we can conclude that $T(n) = a^kT(n-k) + b^kT(n-2k)$\vskip5pt
+since $n-2k$ decrease faster than $n-k$. 
+The base case is $T(n) = a^kc_1 + b^kc_0$ \vskip5pt
+So the close form of $T(n)$ is $T(n) = a^nc_1 + b^nc_0$ \vskip5pt
+If we assume $h(n)$ can serve as a closed-form solution for $T(n)$,\vskip5pt
+$h(n) = Aq_1^n+Bq_2^n = a^nc_1 + b^nc_0$\vskip5pt
+Then we have $q_1 = a$ and $q_2 = b$, $A = c_1$ and $B=c_0$\vskip5pt
+In conclusion, if we add condition: $q_1 = a$ and $q_2 = b$, $h(n)$ can be the close form for $T(n)$
+\\[2ex]
+\\[2ex]
+(v)  According to previous parts , $T(n) = c_1a^n + c_0b^n = 17(5^n) + 5(-6)^n$
+\end{document}
