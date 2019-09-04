@@ -1,0 +1,310 @@
+% Template to use to complete Problem Set 3.
+% If you are using ShareLaTeX, you'll want to upload this file to your account.
+% Before modifying this file, we recommend trying to compile it as-is
+% to see what the basic template gives.
+
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\newcounter{ProblemNum}
+\newcounter{SubProblemNum}[ProblemNum]
+\renewcommand{\theProblemNum}{\arabic{ProblemNum}}
+\renewcommand{\theSubProblemNum}{\alph{SubProblemNum}}
+\newcommand*{\anyproblem}[1]{\newpage\subsection*{#1}}
+\newcommand*{\problem}[1]{\stepcounter{ProblemNum} %
+\anyproblem{Problem \theProblemNum. \; #1}}
+\newcommand*{\soln}[1]{\subsubsection*{#1}}
+\newcommand*{\solution}{\soln{Solution}}
+\renewcommand*{\part}{\stepcounter{SubProblemNum} %
+\soln{Part (\theSubProblemNum)}}
+
+
+% Document metadata
+\title{Problem Set \#3  \hspace{3cm} CSC236 Fall 2018}
+\author{Si Tong Liu, shuo Yang, Jing Huang}
+\date{31/10/2018}
+
+
+% Document starts here
+\begin{document}
+\maketitle
+
+
+
+\noindent \rule{\textwidth}{1pt}
+
+
+
+
+
+\vfill
+We declare that this assignment is solely our own work, and is in accordance
+with the University of Toronto Code of Behaviour on Academic Matters.
+
+\noindent \rule{\textwidth}{1pt}
+
+This submission has been prepared using \LaTeX.
+
+\newpage
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(Warmup - this problem will NOT be marked)}.
+\\
+
+Consider the following recurrence that results from some unspecified divide-and-conquer algorithm, where $k$ is a positive constant and $1 \le z \le m-1$:
+\[
+T(m, n) = \begin{cases}
+km, & n \le 2\\
+kn, & m \le 2\\
+kmn + T(z, n/2) + T(m-z, n/2), &  m, n > 2
+\end{cases}
+\]
+
+Use {\bf induction} to prove a Theta bound for $T(m, n)$.
+Do {\bf NOT}  use the substitution method. To help you guess the Theta bound, here are two possibilities; perhaps one of these is correct: $T(m, n) = \Theta(mn), T(m, n) = \Theta(m^2 n^2)$.\vskip5pt
+
+
+
+%%Write your solution here
+Solution:\vskip5pt
+Firstly, we guess the Theta bound of $T(m,n)$ is $\Theta(mn)$.\vskip5pt 
+Secondly, we choose to use complete induction to prove.\vskip5pt
+Predicate P(n): the Theta bound of $T(m,n)$ is $ \Theta(mn)$, for $k$ is a positive constant, $1 \le z \le m-1$ and $m,n \ge 0$ \vskip5pt
+Base case: When $m = 2$ and $n = 2$ , we have $z = m -1 = 2 -1 = 1$.\vskip5pt 
+T(2,2) = 4k + T(1,1) + T(1,1)\vskip5pt
+\qquad = 4k + k*1*1 + k*1*1  = 6k \vskip5pt 
+6k $\ge$ 1*mn(where m = n = 2, and c = 1) , big O prove completes\vskip5pt
+6k $\le$ 2*mn(where m = n = 2, and c = 2) , big Omega prove completes\vskip5pt
+T(mn) is the bound of T(2,2) so base case holds.
+\vskip5pt 
+Induction hypothesis: assume P(n) is true\vskip5pt
+Induction steps: \vskip5pt 
+(1) prove Big O\vskip5pt
+assume $T(z, n/2) \le c_1(zn/2)$ and $T(m - z, n/2) \le c_2[(m - z)n/2]$ \vskip5pt
+T(n) = kmn + T(z, n/2) + T(m-z, n/2)\vskip5pt 
+\qquad $\le$ kmn + $c_1(zn/2)$ + $c_2[(m - z)n/2]$\vskip5pt
+\qquad = kmn + $c_1zn/2$ + $c_2mn/2$ + $c_2Zn/2$\vskip5pt
+\qquad = kmn + $n/2(c_1z +c_2m - c_2z)$\vskip5pt 
+\qquad $\le$ kmn + $n/2(c_1z + c_2m)$\vskip5pt
+\qquad $\le$ kmn + $n/2(c_1m + c_2m)$(since $z\le m -1$, so $z \le m$)\vskip5pt
+\qquad = kmn + $(c_1 + c_2)mn/2$\vskip5pt
+\qquad = $(2k+c_1+c_2)mn/2$\vskip5pt
+This completes the Big O proof, for $c = (2k+c_1+c_2)$ and $m_0,n_0 = 1$\vskip5pt 
+(2) prove Big Omega\vskip5pt 
+assume $T(z, n/2) \ge c_1(zn/2)$ and $T(m - z, n/2) \ge c_2[(m - z)n/2]$ \vskip5pt
+T(n) = kmn + T(z, n/2) + T(m-z, n/2)\vskip5pt 
+\qquad $\ge$ kmn + $c_1(zn/2)$ + $c_2[(m - z)n/2]$\vskip5pt
+\qquad = kmn + $c_1zn/2$ + $c_2mn/2$ + $c_2Zn/2$\vskip5pt
+\qquad = kmn + $n/2(c_1z +c_2m - c_2z)$\vskip5pt 
+\qquad = kmn \vskip5pt
+This completes the Big Omega proof, for $c_0 =k$ and $m_0 and n_0 = 1$\vskip5pt
+In conclusion, the Big Theta bound for $T(m,n)$ is $\Theta(mn)$
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(6 Marks)} Consider the following three methods of solving a particular problem (input size $n$):
+\begin{enumerate}
+	\item
+	You divide the problem into three subproblems, each $\frac{1}{5}$ the size of the original problem, solve each recursively, then combine the results in time linear in the original problem size.
+	
+	\item
+	You divide the problem into 16 subproblems, each $\frac{1}{4}$ of size of the original problem, solve each recursively, then combine the results in time quadratic in the original problem size.
+	
+	\item
+	You reduce the problem size by 1, solve the smaller problem recursively, then perform an extra ``computation step'' that requires linear time. 
+\end{enumerate}
+
+Assume the base case has size 1 for all three methods.\\ \\
+For each method, write a recurrence capturing its worst-case runtime.
+Which of the three methods yields the fastest asymptotic runtime? 
+
+In your solution, you should use the Master Theorem wherever possible. In the case where the Master Theorem doesn't apply, \emph{clearly state why not} based on your recurrence, and show your work solving the recurrence using another method (no proofs required).\vskip5pt 
+
+
+%%Write your solution here
+Solution: \vskip5pt
+1. assume $T(n) = 3T(n/5) + O(n)$\vskip5pt
+Then use Master Theorem:\vskip5pt
+$a = 3, b = 5, f(n) = n$, where $k = 1$\vskip5pt
+$log_{b}a$ = $log_{5}3 < k $ (since $log_{5}3 <0$)\vskip5pt
+so $T(n) = O(n)$ \\[2ex]
+
+2. assume $T(n) = 16T(n/4) + O(n^2)$\vskip5pt
+Then we use Master Theorem:\vskip5pt
+$a = 16, b = 4, f(n) = n^2$, where $k=2$\vskip5pt
+$log_{b}a$ = $log_{4}16 = 2 = k $\vskip5pt
+so $T(n) = O(n^2log n)$\\[2ex]
+
+3. assume $T(n) = T(n-1) + c$ (where c is the constant runtime)\vskip5pt
+We can not use Master Theorem here, since the $(n-1)/n$ is not a constant.\vskip5pt
+Then we will use repeated substitution here.\vskip5pt
+when k = 1: $T(n) = T(n-1) + c$\vskip5pt
+when k = 2: $T(n) = T(n-2) + c + c$\vskip5pt
+when k = 3: $T(n) = T(n-3) + c + c + c$\vskip5pt
+\qquad \qquad ...\vskip5pt
+$T(n) = T(n-k) + kc$\vskip5pt
+Since the base case is size of 1,we have $n-k = 1 => k = n-1$\vskip5pt
+so $T(n) = 1 + (n-1)k$\vskip5pt
+\qquad = $nk + 1 - k$\vskip5pt
+\qquad $\le nk + 1$\vskip5pt
+\qquad $\le nk+n$ = $(k+1)n$\vskip5pt
+So the runtime is O(n) for $c_0 = k+1$ and $n_0 = 1$
+
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(8 marks)} (Modelled after Exercise 14 from lecture notes, p.48).\\ \\
+	Recall the recurrence for the worst case runtime of quicksort:
+	\[
+	T(n) = 
+	\begin{cases}
+	c, & \text{if } n \leq 1\\
+	T(|L|) + T(|G|) + dn, & \text{if } n > 1
+	\end{cases}
+           \]
+	where $L$ and $G$ are the partitions of the list. Clearly, how the list is partitioned matters a great deal for the runtime of quicksort.
+	\begin{enumerate}
+		\item 
+		Suppose the lists are split as follows: $|L| = \frac{n}{4},  |G| = \frac{3n}{4}$ at each recursive call.
+    
+    Find a tight asymptotic bound on the runtime of quicksort using this assumption.
+		\item 
+		Now suppose that the lists are always very unevenly split: $|L| = n-4$ and $|G| = 3$ at each recursive call for $n>4$. Find a tight asymptotic bound on the runtime of quicksort using this assumption.
+	\end{enumerate}\vskip5pt
+	
+
+
+
+%%Write your solution here
+Solution:\vskip5pt
+1. Since $|L| = \frac{n}{4}$ and $|G| = \frac{3n}{4}$\vskip5pt
+we can have $T(n) = T(\frac{n}{4})$ + $T(\frac{3n}{4}) + dn$\vskip5pt
+To find the tight asymptotic bound, we try to get the Big O bound.\vskip5pt
+Since $|L| < |G|$, we have:\vskip5pt
+$T(n) = T(\frac{n}{4})$ + $T(\frac{3n}{4}) + dn$\vskip5pt
+\qquad $\le  T(\frac{3n}{4})$ + $T(\frac{3n}{4}) + dn$ (since n$\ge$0)\vskip5pt
+\qquad = $2  T(\frac{3n}{4}) + dn$\vskip5pt
+then we use Master Theorem:\vskip5pt 
+a = 2 b = $\frac{4}{3}$ , $f(n) = n$, where k = 1\vskip5pt
+$\log_{b}a$ = $\log_{\frac{4}{3}}2 \approx 2.4 \ge 1$\vskip5pt
+So the Big O bound for T(n) is $O(n^{2.4})$\\[2ex]
+In order to find the tightest bound, we make a guess of $O(n)$.\vskip5pt
+then we have $T(n) \le c_0n$, where $c_0$ is a positive number and $n_0 \ge 0$\vskip5pt
+we use complete induction to prove this\vskip5pt
+Firstly, the predicate P(n): $T(n) \in O(n)$, for $c_0 positive and n_0 \ge 0$\vskip5pt
+Secondly, the base case: when n = 0, $T(0) = T(0) + T(0) + 0 = 2c$\vskip5pt
+\qquad \qquad \qquad \qquad \qquad\qquad\qquad\qquad\qquad \qquad $\le 2n$ (where $n\ge c$)\vskip5pt
+so the base case holds for $c_0 =2$ and $n_0 = c$\vskip5pt 
+Thirdly, the induction hypothesis: we assume P(n) holds for $P(1),P(2),p(3) .... and P(n)$\vskip5pt 
+Fourthly, the induction step: \vskip5pt
+$T(n) = T(\frac{n}{4})$ + $T(\frac{3n}{4}) + dn$\vskip5pt
+\qquad $\le T(\frac{3n}{4})$ + $T(\frac{3n}{4}) + dn$ (since $\frac{3n}{4} < \frac{3n}{4} $)\vskip5pt
+\qquad = $2 T(\frac{3n}{4}) + dn$ \vskip5pt
+suppose $T(\frac{3n}{4}) \le c_0\frac{3n}{4}$ (where $T(n) \le c_0n$)\vskip5pt 
+show $ T(n) = 2T(\frac{3n}{4}) + dn$ \vskip5pt
+\qquad \qquad $= 2c\frac{3n}{4} + dn = (\frac{3c}{2} +d)n$\vskip5pt
+Therefore, we choose $c_0 = \frac{3c}{2} +d$ and $n_0 = 2$ to complete the proof\vskip5pt
+The tightest Big O bound is O(n)\\[2ex]
+2. Since $|L| = n-4$ and $|G| = 3$ , we can assume the run time of $T(|G|)$ is p, where p is a constant number\vskip5pt
+Then we have $T(n) = T(n-4) + p + dn$\vskip5pt
+We use repeated substitution to find the closed form\vskip5pt
+when k = 1 : $T(n) = T(n-4) + p + dn$\vskip5pt
+when k = 2 : $T(n) = (T(n-4-4)+p + d(n-4)) + p + dn$\vskip5pt
+\qquad \qquad \qquad = $T(n-8) + 2p + 2dn - 4d$ \vskip5pt
+when k = 3 : $T(n) = T(n-8-4)+ p + d(n-8) + 2p + 2dn -4d $\vskip5pt
+\qquad \qquad \qquad = $T(n-12) + 3p + 3dn -12d$\vskip5pt
+when k = 4 : $T(n) = T(n-12-4)+ p + d(n-12) + 3p + 3dn -12d $\vskip5pt 
+\qquad \qquad \qquad = $T(n-16) + 4p + 4dn - 24d$\vskip5pt
+\qquad \qquad \qquad \qquad...\vskip5pt
+$T(n) = T(n-4k) + kp + kdn - 4\frac{(k-1)k}{2}$\vskip5pt
+\qquad = $T(n-4k) + kp + kdn - 2(k-1)k$\vskip5pt
+when $n-4k = 0 => k = \frac{n}{4}$ (Base case)\vskip5pt
+So we get $T(n) = c + \frac{n}{4}p + \frac{n}{4}dn - \frac{n^2}{8} + \frac{n}{2} $\vskip5pt
+(1) Big O prove:\vskip5pt
+$T(n) = c + \frac{n}{4}p + \frac{n}{4}dn - \frac{n^2}{8} + \frac{n}{2} $\vskip5pt
+\qquad $\le c + \frac{n}{4}p + \frac{n^2}{4}d + \frac{n}{2}$ \vskip5pt
+\qquad $\le cn^2 + pn^2 + dn^2 + n^2 $  , where $ n\ge 0$\vskip5pt
+\qquad =$(c+p+d+1)n^2$\vskip5pt
+This completes the Big O proof with $c_0 = c+p+d+1 $ and $n_0 = 0$\\[2ex]
+(2) Big Omega prove:\vskip5pt
+$T(n) = c + \frac{n}{4}p + \frac{n}{4}dn - \frac{n^2}{8} + \frac{n}{2} $\vskip5pt
+\qquad $\ge \frac{n}{4}dn - \frac{n^2}{8}$ (since p,d are positive numbers and $n_0 > 0$)\vskip5pt
+\qquad = $\frac{2d-1}{8}n^2$ (where $2d - 1$ needs to positvie $=> d > \frac{1}{2}$)\vskip5pt
+This completes the proof with ${2d-1}{8}$, and $n_0 = 0$\vskip5pt
+In conclusion, the tight asymptotic bound is $\Theta(n^2)$
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\problem{}
+\textsc{(8 marks)} 
+
+\textbf{Video rankings.} The InstaVid social network collects user preferences by asking them to rank their favorite videos. One of the features of InstaVid is offering friendship suggestions for users with similar tastes, using the following metric.
+
+If user \emph{One} ranks the videos using the sequence $1,2,\dots,n$, and user \emph{Two} ranks same videos using the sequence $v_1,v_2,\dots,v_n$ of numbers $1,2,\dots,n$, then their social distance is computed by counting all pairs $(v_i,v_j)$ from the ranking of \emph{Two} that satisfy the condition $v_i>v_j$  for $i<j$. For example, if the user \emph{One} ranks four videos as $1,2,3,4$ and \emph{Two} ranks them as $3,1,2,4$ then 
+their social distance is $2$ because of the pairs $(3,1)$ and $(3,2)$ in the rankings of \emph{Two}.
+
+\begin{enumerate}
+\item[(i)] Design an algorithm \verb|social_distance(prefa, prefb)| with time complexity in $\Theta(n^2)$ that computes the social distance for users with video rankings \verb|prefa| and \verb|prefb|. Please write your solution in the form of a Python function. Justify the run time of your code.
+
+\item[(ii)] Improve your algorithm using divide and conquer approach. Fully analyse your algorithm; you may use the Master Theorem.
+Write your solution in the form of a Python function. (You may also write pseudocode if desired; we will not run your code anyway, but it is aceptable to actually implement your code in Python and copy it in your soluton.)
+
+
+\end{enumerate}
+%%Write your solution here
+Solution:\vskip5pt
+1.
+\begin{verbatim}
+def social_distance(prefa, prefb):
+    count = 0
+    
+    list_tuple = []
+    for num in prefa:
+        for num_p in prefa:
+            if num < num_p:
+                list_tuple += [(num,num_p)]
+
+    for t in list_tuple:
+        if prefb.index(t[0]) > prefb.index(t[1]):
+            count += 1
+                       
+    return count
+\end{verbatim}
+According to the python code above, the runtime complexity can be written as: \vskip5pt 
+T(n) = 1 + 1 + $2n^2$ + $2n$ + 1 = $2n^2 + 2n + 3$\vskip5pt 
+Then we are going to prove the Big Theta bound of T(n) is $\Theta(n^2)$
+(1) Big O proof:
+$T(n) = 2n^2 + 2n + 3$\vskip5pt
+\qquad $\le 2n^2 + 2n^2 + 3n^2$ (if $n\ge 0$)\vskip5pt 
+\qquad =$ 7n^2$\vskip5pt
+So this completes the Big O proof with c = 7 and $n_0 = 0$\vskip5pt 
+(2) Big Omega proof:
+$T(n) = 2n^2 + 2n + 3$\vskip5pt
+\qquad $\ge 2n^2 + 2n $\vskip5pt
+\qquad $\ge 2n^2$\vskip5pt
+So this completes the Big Omega proof with c = 2 and $n_0 = 0$\vskip5pt
+Therefore, the Big Theta bound for the python function is $\Theta(n^2)$\\[2ex]
+2. 
+\begin{verbatim}
+def social_distance(prefa, prefb):
+    count = 0
+    if prefb[0] greater than any rest of elements in prefb:
+        count += 1
+    return prefb[:len(prefb)/2]+ prefb[len(prefb)/2:] + count
+\end{verbatim}
+so the runtime complexity of the function above is $T(n) = 2T(n/2) + n$\vskip5pt
+then we apply Master Theorem here\vskip5pt
+a = 2 b = 2, $f(n) = n$ , where k = 1\vskip5pt
+$\log_{b}a = \log_{2}2 = 1 = k$\vskip5pt
+Therefore the runtime of this function is O(nlogn).
+\end{document}
