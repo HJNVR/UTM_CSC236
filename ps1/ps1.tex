@@ -1,0 +1,168 @@
+% Template to use to complete Problem Set 1.
+% If you are using ShareLaTeX, you'll want to upload this file to your account.
+% Before modifying this file, we recommend trying to compile it as-is
+% to see what the basic template gives.
+
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcounter{ProblemNum}
+\newcounter{SubProblemNum}[ProblemNum]
+\renewcommand{\theProblemNum}{\arabic{ProblemNum}}
+\renewcommand{\theSubProblemNum}{\alph{SubProblemNum}}
+\newcommand*{\anyproblem}[1]{\newpage\subsection*{#1}}
+\newcommand*{\problem}[1]{\stepcounter{ProblemNum} %
+\anyproblem{Problem \theProblemNum. \; #1}}
+\newcommand*{\soln}[1]{\subsubsection*{#1}}
+\newcommand*{\solution}{\soln{Solution}}
+\renewcommand*{\part}{\stepcounter{SubProblemNum} %
+\soln{Part (\theSubProblemNum)}}
+
+
+% Document metadata
+\title{Problem Set \#1  \hspace{3cm} CSC236 Fall 2018}
+\author{Si Tong Liu, shuo Yang, Jing Huang }
+\date{9/27/2018}
+
+
+% Document starts here
+\begin{document}
+\maketitle
+
+
+
+\noindent \rule{\textwidth}{1pt}
+
+
+
+
+
+\vfill
+We declare that this assignment is solely our own work, and is in accordance
+with the University of Toronto Code of Behaviour on Academic Matters.
+
+\noindent \rule{\textwidth}{1pt}
+
+This submission has been prepared using \LaTeX.
+
+\newpage
+
+
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(Warmup - this problem will NOT be marked)} Let $n\in\mathbb{N}$. Describe the largest set of values $n$ for which you think $2^n<n!$. Use some form of induction to prove that your description is correct. 
+\vskip2pt
+\noindent (Here $m!$ stands for $m$ factorial, the product of first $m$ non-negative integers. By convention, $0!=1$.)\\
+
+%%Write your solution here
+Solution:
+    We use simple induction to solve this question. \vskip5pt
+    if $0<=n<=4, 2^n > n$. So n has to be greater than or equal to 4.
+    Hence, the predicate is P(n) : $2^n < n!$ , where $n >= 4$.\vskip5pt
+    First step, the base case. When $n = 4, 2^4 = 16, 4! = 4*3*2*1 = 24 , 2^4 < 2^4$, so P(4) holds\vskip5pt
+    Second step, the induction hypothesis: Assume $k>= 4$ , P(k): $2^k<k!$ holds.\vskip5pt
+    Then doing the inductive step. We have to prove P(k+1) holds, for $k>=4$\vskip5pt
+    It is clear that $2^(k+1) = 2*2^k$. Since $2^k < k!$(by IH), we can get $2*2^k < 2*k!$. For all $k>=4$, we can get that  $2*k! < (k+1)*k!$. So $2^{k+1} < (k+1)!$, so P(k+1) holds.\vskip5pt
+    In conclusion, P(n) is True.
+    
+    
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(4 Marks)} Let $n\in\mathbb{N}\setminus\{0\}$. Using some form of induction, prove that for all such $n$, there exists and odd natural $m$ and a natural $k$ such that $n=2^km$.\\
+
+
+%%Write your solution here
+Solutions: 
+    We use strong induction to prove this statement.\vskip5pt
+    The predicate is P(n): $n = 2^km$, for all $n\in\mathbb{N}\setminus\{0\}$, m is an odd natural number and k is a natural number.\vskip5pt
+    First step, the Base case.when n=1,P(1) : There exists a k = 0 and m = 1, such that 1 = $2^0*1$. So P(1)holds. \vskip5pt
+    Second step,the induction hypothesis: Assume, P(n) is true for all
+    $n\in\mathbb{N}\setminus\{0\}$,where m is an odd natural number and k is any natural number,  Then we need to prove P(n+1).\vskip5pt
+    Third step, the inductive steps. There are two cases.\vskip5pt
+    Case 1: n+1 is an odd natural number. In this case, $n+1 = 2^0 * (n+1)$ , where $k = 0\in\mathbb{N}$ and m = n+1 is an odd natural number. So P(n+1) holds.\vskip5pt
+    Case 2: n + 1 is an even natural number. Assume we have have a natural number L. Let $n+1 = 2 * L$, so $L < n +1.$. By inductive hypothesis, L could be written as $L = 2^km$. Then n+1 could be written as $n+1 = 2*L = 2*2^km = 2^{k+1}m $. So P(n+1) holds. This completes the inductive step. 
+    
+     
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(6 Marks)}  Denote $\mathbb{Z}[x]$ the set of polynomials on one variable $x$ with integer coefficients.
+For example, $p(x)=x^2-3x+42$ is such a polynomial, whereas $q(x)=-1.5x^3+97x$ is not. Also recall polynomials on one variable with integer coefficients can be added and multiplied with each other using usual rules of high school algebra. (You are allowed to use only the rules of elementary algebra and what is taught is this course in your solution. Any other approaches with receive no credit).
+
+\vskip5pt
+Let's define the set $S\subseteq \mathbb{Z}[x]$ using the following rules:
+
+
+\begin{enumerate}
+\item $2\in S$.
+\item $x\in S$.
+\item $\forall p(x)\in\mathbb{Z}[x], \forall q(x)\in S,\,\, p(x)q(x)\in S$.
+\item $\forall p(x),q(x) \in S,\,\, p(x)+q(x)\in S$.
+\end{enumerate}
+
+\vskip5pt
+
+Also define the set $T=\{2p(x)+xq(x)|p(x),q(x)\in\mathbb{Z}[x]\}$.
+
+\vskip5pt
+
+Using some form of induction, prove $S=T$. \vskip5pt
+
+%%Write your solution here
+
+solution:  We use structural induction to prove this statement. \vskip5pt
+The predicate is P(n) : S = T, when $S\subseteq \mathbb{Z}[x]$, and $T=\{2p(x)+xq(x)|p(x),q(x)\in\mathbb{Z}[x]\}$.\vskip5pt
+First step, the base case. When the highest degree of  set S and T are both 0, the elements in S and T are all constants. Then if we assume a constant $t\in\mathbb{Z}[x]$, then $t\in\mathbb{S}$ and also $t\in\mathbb{T}$. So Base case holds.\vskip5pt
+Second step, the induction hypothesis. We assume S = T is always true , when $S\subseteq\mathbb{Z}[x]$,and $T=\{2p(x)+xq(x)|p(x),q(x)\in\mathbb{Z}[x]\}$ with highest power k. Then we want to prove S=T with highest degree k+1.
+To prove S = T, We divide the process into two parts (1) $S\subseteq T$ (2) $T\subseteq S$ \vskip5pt
+(1) $S\subseteq T$\vskip5pt
+We assume p(x) = $a_0x^0 + a_1x^1 + a_2x^2 + ...+ a_{k+1}x^{k+1}$ , \vskip5pt
+then we separate p(x) into p(x) = $a_0 + x(a_1x^1 + a_2x^2 + ...+ a_{k+1}x^k$ \vskip5pt
+It is clear that $a_0$ could be written as $a_0 = 2(a_0/2 x^0)$\vskip5pt
+so p(x) = $2(a_0/2x^0) + x(a_1x^1 + a_2x^2 + ...+ a_{k+1}x^k)$, which is in the form of 2q(x) + xp(x) (by recursive rule 3,4 in S) , so $S\subseteq T$ holds for k+1.\vskip5pt
+(2)  $T\subseteq S$ \vskip5pt
+since $2\in\mathbb{S}$ and $q(x)\in\mathbb{S}$, $2q(x)\in\mathbb{S}$ (by rule 3 defined in S).\vskip5pt
+Also, $x\in\mathbb{S}$ and $p(x)\in\mathbb{Z}[x]$, $xp(x)\in\mathbb{S}$(by rule 3 defined in S).\vskip5pt
+Then by rule 4 defined in S, we can conclude that ${2q(x) + xp(x)} \in\mathbb{S}$. This holds for k+1. So $T\subseteq S$. This completes the inductive step.
+
+
+
+
+
+                
+
+
+
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\problem{}
+\textsc{(6 marks)} Let $P$ be a convex polygon with consecutive vertices $v_1, v_2, ..., v_n$.
+          Use some form of induction induction to show that when $P$ is triangulated into $n - 2$ triangles, 
+          the $n - 2$ triangles can be numbered $1, 2, ..., n - 2$ so that $v_i$ is a vertex of 
+          triangle $i$ for $i = 1, 2, ..., n-2$. 
+
+
+%%Write your solution here
+Solution: We use simple induction to prove this statement\vskip5pt
+The predicate is P(n): $P$ is triangulated into $n - 2$ triangles, 
+          the $n - 2$ triangles can be numbered $1, 2, ..., n - 2$ so that $v_i$ is a vertex of 
+          triangle $i$ for $i = 1, 2, ..., n-2$. \vskip5pt
+First step, the base case. When n = 3,P(3): the convex polygon has $3-2 = 1$  triangle, and $v_1$ is a vertex of the triangle. So base case holds.\vskip5pt
+Second step, the induction hypothesis. We assume it is true that a convex polygon with n vertices could be triangulated in n-2 triangle, and the $n - 2$ triangles can be numbered $1, 2, ..., n - 2$ so that $v_i$ is a vertex of 
+          triangle $i$ for $i = 1, 2, ..., n-2$.  Now we want to prove it is true for n+1.\vskip5pt
+Third step, the inductive steps.  By induction hypothesis, if we have a polygon with n vertices, then the number of edges of P is n, and the number of triangles will be n-2. \vskip5pt
+Then we create one point C Parallel to one edge E , and connect point C with the two vertices that on the edge E. It is clear that we would have a new polygon $p_1$ with n+2 edges. However, since E is a internal edge of $p_1$, the number of edges is actually $n+2-1 = n+1$. Thus we have $n+1-2 = n-1$ triangles, and all these triangles can be numbered as 1,2,...,$n-1$, and that $v_i$ is a vertex of triangle i for i = 1,2,...,$n-1$. So P(n+1) holds. This completes the inductive steps.
+
+\end{document}
+
+
